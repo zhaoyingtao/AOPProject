@@ -22,9 +22,30 @@ public class TraceAspect {
      *
      * @param joinPoint
      */
-    @Before("execution(* *.on*(..))")
+    @Before("execution(* *.my*(..))")
     public void onActivityMethodBefore(JoinPoint joinPoint) {
         String key = joinPoint.getSignature().toString();
+        //方法名
+        String name = joinPoint.getSignature().getName();
+        //方法所在的类
+        String target = joinPoint.getTarget().toString();
+        //方法在那个类多少行
+        String s = joinPoint.getSourceLocation().toString();
+        //方法中的参数，什么类型都可以，根据类型可以解析出参数的值
+        Object[] args = joinPoint.getArgs();
+        if (args != null) {
+            for (int i = 0; i < args.length; i++) {
+                Object arg = args[i];
+                if (arg instanceof UserBean){
+                    UserBean userBean = (UserBean) arg;
+                    Log.e(TAG, "对象参数值:" + userBean.getName()+"==="+userBean.getAge() + "\n");
+                }else {
+                    String strinn = String.valueOf(arg);
+                    Log.e(TAG, "参数值strinn:" + strinn + "\n");
+                }
+            }
+        }
+
         Log.e(TAG, "onActivityMethodBefore:" + key + "\n" + joinPoint.getThis());
     }
 
@@ -35,6 +56,7 @@ public class TraceAspect {
      */
     @After("execution(* android.app.Activity.on**(..))")
     public void onActivityMethodAfter(JoinPoint joinPoint) {
+
         String key = joinPoint.getSignature().toString();
         Log.e(TAG, "onActivityMethodAfter:" + key + "\n" + joinPoint.getThis());
     }

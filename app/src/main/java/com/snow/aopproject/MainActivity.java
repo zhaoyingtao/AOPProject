@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.snow.gintonic.DebugTrace;
+import com.snow.gintonic.UserBean;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "snow_aop";
@@ -24,18 +24,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
             }
         });
-        onMyPrivate();
-        onMyPublic();
+        myPrivate("李四");
+        myPublic(new UserBean("张三",19));
     }
 
-    private boolean onMyPrivate() {
+    private boolean myPrivate(String mm) {
         return false;
     }
 
-    public void onMyPublic() {
+    public void myPublic(UserBean userBean) {
 
     }
-
     @Override
     protected void onResume() {
         super.onResume();
