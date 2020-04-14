@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
-import org.aspectj.bridge.IMessage
-import org.aspectj.bridge.MessageHandler
-import org.aspectj.tools.ajc.Main
+
 
 android {
     compileSdkVersion 29
@@ -32,6 +30,10 @@ dependencies {
     implementation project(":gintonic")
 }
 //以下全为aop配置
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
 final def log = project.logger
 final def variants = project.android.applicationVariants
 
