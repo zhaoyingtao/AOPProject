@@ -6,15 +6,27 @@ import java.util.concurrent.TimeUnit;
  * author : zyt
  * e-mail : 632105276@qq.com
  * date   : 2020-04-10
- * desc   :
+ * desc   :处理耗时的工具类==不能使用单例，同时执行，会被第二个重置
  */
-public class StopWatch {
+public class UseTimeHelper {
     private long startTime;
     private long endTime;
     private long elapsedTime;
+//    private static UseTimeHelper useTimeHelper;
+//
+//    public static UseTimeHelper init() {
+//        if (useTimeHelper == null) {
+//            synchronized (UseTimeHelper.class) {
+//                if (useTimeHelper == null) {
+//                    useTimeHelper = new UseTimeHelper();
+//                }
+//            }
+//        }
+//        return useTimeHelper;
+//    }
 
-    public StopWatch() {
-        //empty
+    public UseTimeHelper() {
+
     }
 
     private void reset() {

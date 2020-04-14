@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
  * author : zyt
  * e-mail : 632105276@qq.com
  * date   : 2020-04-10
- * desc   :
+ * desc   :耗时注入类
  */
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.CONSTRUCTOR, ElementType.METHOD})
-public @interface DebugTrace {
+public @interface DebugTimeConsuming {
 }

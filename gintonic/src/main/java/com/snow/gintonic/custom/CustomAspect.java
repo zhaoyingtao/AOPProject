@@ -1,6 +1,6 @@
 package com.snow.gintonic.custom;
 
-import androidx.annotation.NonNull;
+import android.util.Log;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -16,9 +16,11 @@ import org.aspectj.lang.reflect.MethodSignature;
  */
 @Aspect
 public class CustomAspect {
-
+    /**
+     * 注意此处DebugTimeConsuming是定义的注解类的路径
+     */
     private static final String POINTCUT_METHOD =
-            "execution(@com.snow.gintonic.custom.DebugTrace * *(..))";
+            "execution(@com.snow.gintonic.custom.DebugTimeConsuming * *(..))";
 
     @Pointcut(POINTCUT_METHOD)
     public void methodAnnotatedWithDebugTrace() {
@@ -29,35 +31,13 @@ public class CustomAspect {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
-
-        final StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
+        UseTimeHelper useTimeHelper = new UseTimeHelper();
+        useTimeHelper.start();
         // 被注解的方法在这一行代码被执行
         Object result = joinPoint.proceed();
-        stopWatch.stop();
+        useTimeHelper.stop();
         //打印被监听方法的执行时间
-        DebugLog.log(className, buildLogMessage(methodName, stopWatch.getTotalTimeMillis()));
-
+        Log.e("snow_aop", className + " --> " + methodName + " --耗时--> " + useTimeHelper.getTotalTimeMillis() + "ms");
         return result;
-    }
-
-    /**
-     * Create a log message.
-     *
-     * @param methodName     A string with the method name.
-     * @param methodDuration Duration of the method in milliseconds.
-     * @return A string representing message.
-     */
-    private static String buildLogMessage(String methodName, long methodDuration) {
-        StringBuilder message = new StringBuilder();
-        message.append("Gintonic --> ");
-        message.append(methodName);
-        message.append(" --> ");
-        message.append("[");
-        message.append(methodDuration);
-        message.append("ms");
-        message.append("]");
-
-        return message.toString();
     }
 }

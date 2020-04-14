@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.snow.gintonic.bind.BindView;
 import com.snow.gintonic.bind.BindViewParser;
-import com.snow.gintonic.custom.DebugTrace;
+import com.snow.gintonic.custom.DebugTimeConsuming;
 
 /**
  * author : zyt
@@ -23,7 +23,7 @@ public class SecondActivity extends Activity {
     @BindView(R.id.textview)
     TextView textView;
 
-    @DebugTrace
+    @DebugTimeConsuming
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

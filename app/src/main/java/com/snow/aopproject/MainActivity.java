@@ -4,16 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import com.snow.gintonic.custom.DebugTrace;
+import com.snow.gintonic.custom.DebugTimeConsuming;
 import com.snow.gintonic.UserBean;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "snow_aop";
 
-    @DebugTrace
+    @DebugTimeConsuming
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         customAopMethod();
     }
 
-    //    @DebugTrace
+    @DebugTimeConsuming
     private void customAopMethod() {
 
     }

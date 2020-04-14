@@ -78,6 +78,6 @@ public class TraceAspect {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
-        Log.e(TAG, "Around=======" + "onActivityMethodBefore:");
+        Log.e(TAG, "Around=======" + "onActivityMethodAfter:");
     }
 }
