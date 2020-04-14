@@ -1,4 +1,4 @@
-package com.snow.gintonic;
+package com.snow.gintonic.custom;
 
 import java.util.concurrent.TimeUnit;
 

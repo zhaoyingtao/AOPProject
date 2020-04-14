@@ -1,4 +1,6 @@
-package com.snow.gintonic;
+package com.snow.gintonic.custom;
+
+import androidx.annotation.NonNull;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -12,24 +14,17 @@ import org.aspectj.lang.reflect.MethodSignature;
  * date   : 2020-04-10
  * desc   :检测自定义方法的注解
  */
-//@Aspect
+@Aspect
 public class CustomAspect {
 
     private static final String POINTCUT_METHOD =
-            "execution(* *.*(..))";
-
-    private static final String POINTCUT_CONSTRUCTOR =
-            "execution(* *.*(..))";
+            "execution(@com.snow.gintonic.custom.DebugTrace * *(..))";
 
     @Pointcut(POINTCUT_METHOD)
     public void methodAnnotatedWithDebugTrace() {
     }
 
-    @Pointcut(POINTCUT_CONSTRUCTOR)
-    public void constructorAnnotatedDebugTrace() {
-    }
-
-    @Around("methodAnnotatedWithDebugTrace() || constructorAnnotatedDebugTrace()")
+    @Around("methodAnnotatedWithDebugTrace()")
     public Object weaveJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         String className = methodSignature.getDeclaringType().getSimpleName();
@@ -40,7 +35,7 @@ public class CustomAspect {
         // 被注解的方法在这一行代码被执行
         Object result = joinPoint.proceed();
         stopWatch.stop();
-
+        //打印被监听方法的执行时间
         DebugLog.log(className, buildLogMessage(methodName, stopWatch.getTotalTimeMillis()));
 
         return result;

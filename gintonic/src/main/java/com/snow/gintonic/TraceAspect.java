@@ -3,9 +3,12 @@ package com.snow.gintonic;
 import android.util.Log;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 
 /**
  * author : zyt
@@ -13,7 +16,7 @@ import org.aspectj.lang.annotation.Before;
  * date   : 2020-04-10
  * desc   :
  */
-@Aspect
+//@Aspect
 public class TraceAspect {
     public static final String TAG = "snow_aop";
 
@@ -36,10 +39,10 @@ public class TraceAspect {
         if (args != null) {
             for (int i = 0; i < args.length; i++) {
                 Object arg = args[i];
-                if (arg instanceof UserBean){
+                if (arg instanceof UserBean) {
                     UserBean userBean = (UserBean) arg;
-                    Log.e(TAG, "对象参数值:" + userBean.getName()+"==="+userBean.getAge() + "\n");
-                }else {
+                    Log.e(TAG, "对象参数值:" + userBean.getName() + "===" + userBean.getAge() + "\n");
+                } else {
                     String strinn = String.valueOf(arg);
                     Log.e(TAG, "参数值strinn:" + strinn + "\n");
                 }
@@ -59,5 +62,22 @@ public class TraceAspect {
 
         String key = joinPoint.getSignature().toString();
         Log.e(TAG, "onActivityMethodAfter:" + key + "\n" + joinPoint.getThis());
+    }
+
+    /**
+     * 在注入的方法前后执行
+     *
+     * @param joinPoint
+     */
+    @Around("execution(* android.app.Activity.on**(..))")
+    public void onActivityMethodAll(ProceedingJoinPoint joinPoint) {
+        Log.e(TAG, "Around=======" + "onActivityMethodBefore:");
+        try {
+            //joinPoint.proceed()代表执行原始的方法
+            joinPoint.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        Log.e(TAG, "Around=======" + "onActivityMethodBefore:");
     }
 }
