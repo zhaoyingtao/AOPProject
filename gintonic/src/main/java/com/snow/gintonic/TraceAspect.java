@@ -21,12 +21,13 @@ public class TraceAspect {
     public static final String TAG = "snow_aop";
 
     /**
-     * 在所有on开头的方法前执行
+     * 在所有my开头的方法前执行
      *
      * @param joinPoint
      */
     @Before("execution(* *.my*(..))")
     public void onActivityMethodBefore(JoinPoint joinPoint) {
+        //整体信息
         String key = joinPoint.getSignature().toString();
         //方法名
         String name = joinPoint.getSignature().getName();

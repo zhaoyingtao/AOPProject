@@ -32,9 +32,11 @@ public class CustomAspect {
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
         UseTimeHelper useTimeHelper = new UseTimeHelper();
+        //开始计时
         useTimeHelper.start();
         // 被注解的方法在这一行代码被执行
         Object result = joinPoint.proceed();
+        //停止计时
         useTimeHelper.stop();
         //打印被监听方法的执行时间
         Log.e("snow_aop", className + " --> " + methodName + " --耗时--> " + useTimeHelper.getTotalTimeMillis() + "ms");

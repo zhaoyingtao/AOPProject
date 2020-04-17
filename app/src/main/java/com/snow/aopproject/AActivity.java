@@ -1,38 +1,31 @@
 package com.snow.aopproject;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.snow.gintonic.bind.BindView;
-import com.snow.gintonic.bind.BindViewParser;
-import com.snow.gintonic.custom.DebugTimeConsuming;
+import androidx.annotation.NonNull;
 
 /**
- * author : zyt
- * e-mail : 632105276@qq.com
- * date   : 2020-04-10
+ * author : snowzhao
+ * e-mail : zyt@ttsing.com
+ * date   : 2020/4/17
  * desc   :
  */
-public class SecondActivity extends Activity {
-    //可以使用，缺点没有插件支持，开发效率较低
-    @BindView(R.id.btn_01)
-    Button btn01;
-    @BindView(R.id.textview)
-    TextView textView;
+public class AActivity extends Activity {
+    SingleBtnDialog singleBtnDialog;
 
-    //    @DebugTimeConsuming
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
-        BindViewParser.inject(this);
-        btn01.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_a);
+        singleBtnDialog = new SingleBtnDialog(this);
+        findViewById(R.id.btn_01).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                textView.setText("我是被点击显示textview");
+            public void onClick(View view) {
+                singleBtnDialog.show();
+//                startActivity(new Intent(AActivity.this, BActivity.class));
             }
         });
     }
@@ -45,6 +38,11 @@ public class SecondActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -66,5 +64,4 @@ public class SecondActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
 }
