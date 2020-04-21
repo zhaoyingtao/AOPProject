@@ -3,7 +3,6 @@ package com.snow.gintonic;
 import android.util.Log;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
 /**
@@ -12,7 +11,7 @@ import org.aspectj.lang.annotation.Before;
  * date   : 2020/4/17
  * desc   :切面打印生命周期
  */
-@Aspect
+//@Aspect
 public class LifeCycleAspect {
     @Before("execution(* android.app.Activity.on**(..))")
     public void onActivityMethodBefore(JoinPoint joinPoint) {

@@ -10,17 +10,17 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="点击显示文字" />
+        <com.snow.aopproject.touch.CustomViewGroup
+            android:id="@+id/viewGroup"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="#0f0">
 
-        <TextView
-            android:id="@+id/textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="010dp"
-            android:textSize="20sp" />
+            <com.snow.aopproject.touch.CustomTextView
+                android:id="@+id/view"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:background="#00f" />
+        </com.snow.aopproject.touch.CustomViewGroup>
     </LinearLayout>
 </RelativeLayout>

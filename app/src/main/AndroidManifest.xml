@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SecondActivity"
+            android:name=".touch.SecondActivity"
             android:screenOrientation="portrait" />
 
         <activity

@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.snow.aopproject.touch.SecondActivity;
 import com.snow.gintonic.UserBean;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, AActivity.class));
+            }
+        });
+        findViewById(R.id.btn_02).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SecondActivity.class));
             }
         });
     }
